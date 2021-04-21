@@ -13,7 +13,7 @@ class Input:
     @staticmethod
     def init():
 
-        source = open("Py-Snowball/glfwKeyCodes.json")
+        source = open("glfwKeyCodes.json")
 
         data = json.load(source)
         Input.keys = data["codes"]
