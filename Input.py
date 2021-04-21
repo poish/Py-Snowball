@@ -1,17 +1,18 @@
 import json
 import glfw
 
-
-
 class Input:
 
     currentContext = None
+
+    contexts = {}
+
     keys = {}
     names = {}
+
     @staticmethod
     def init():
 
-        Input.currentContext = context()
         source = open("Py-Snowball/glfwKeyCodes.json")
 
         data = json.load(source)
@@ -34,10 +35,14 @@ class Input:
         if action == glfw.PRESS:
             if hasattr(Input.currentContext, name):
                 function = getattr(Input.currentContext, name)
-                function()
+                function(mods)
             else:
                 print("not found")
 
-class context:
-    def pressKeyA(self):
-        print("Key A was pressed")
+    @staticmethod
+    def add(context):
+        Input.contexts[context.name] = context
+
+    @staticmethod
+    def use(name):
+        Input.currentContext = Input.contexts[name]

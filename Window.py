@@ -12,10 +12,10 @@ class Window:
         if not self.window:
             glfw.terminate()
 
-        self.initializeInput(None)
+        self.initializeInput()
         glfw.make_context_current(self.window)
 
-    def initializeInput(self, listener):
+    def initializeInput(self):
         Input.init()
         glfw.set_key_callback(self.window, self.onKeyboardEvent)
 
