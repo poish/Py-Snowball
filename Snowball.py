@@ -9,7 +9,7 @@ class Snowball:
     def loop(self):
         pass
 
-    def terminate(self):
+    def finish(self):
         pass
 
     def run(self):
@@ -24,12 +24,4 @@ class Snowball:
 
             window.finalizeLoop()
 
-        self.terminate()
-            
-class MyApp(Snowball):
-    def setup(self):
-        self.a = 5
-        self.b = 17
-    
-    def loop(self):
-        pass
+        self.finish()

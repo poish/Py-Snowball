@@ -10,11 +10,12 @@ class Input:
     keys = {}
     names = {}
 
+    actions = ["release", "press"]
+
     @staticmethod
     def init():
 
         source = open("glfwKeyCodes.json")
-
         data = json.load(source)
         Input.keys = data["codes"]
         Input.names = data["names"]
@@ -30,14 +31,13 @@ class Input:
     @staticmethod
     def onKeyboardEvent(key, scancode, action, mods):
 
-        name = f"press{Input.names[str(key)]}"
+        name = f"{Input.actions[action]}{Input.names[str(key)]}"
 
-        if action == glfw.PRESS:
-            if hasattr(Input.currentContext, name):
-                function = getattr(Input.currentContext, name)
-                function(mods)
-            else:
-                print("not found")
+        if hasattr(Input.currentContext, name):
+            function = getattr(Input.currentContext, name)
+            function(mods)
+        else:
+            print("not found")         
 
     @staticmethod
     def add(context):
@@ -46,3 +46,5 @@ class Input:
     @staticmethod
     def use(name):
         Input.currentContext = Input.contexts[name]
+
+print(glfw.RELEASE)
