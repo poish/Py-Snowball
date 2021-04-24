@@ -1,7 +1,5 @@
 from Snowball import Snowball
 from Context import Context
-from Shader import ShaderSource
-from OpenGL.GL import GL_VERTEX_SHADER
 
 class cameraControl(Context):
     def pressKeyW(self, mods):
@@ -21,9 +19,6 @@ class myApp(Snowball):
 
         vc = cameraControl("viewControl")
         vc.use()
-        
-        s = ShaderSource("vertex.vs", "fragment.fs")
-        s.createShader(s.vertexSource, GL_VERTEX_SHADER)
 
     def loop(self):
         pass

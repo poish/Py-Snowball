@@ -3,6 +3,7 @@ from Window import Window
 class Snowball:
     def __init__(self):
         self.active = True
+        
     def setup(self):
         pass
 

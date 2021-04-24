@@ -1,4 +1,7 @@
-from OpenGL.GL import *
+from OpenGL.GL import GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_COMPILE_STATUS, GL_LINK_STATUS, \
+    glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glGetShaderInfoLog, \
+    glCreateProgram, glAttachShader, glLinkProgram, glGetProgramiv, glGetProgramInfoLog, \
+    glDeleteShader, glDeleteProgram, glGetUniformLocation, glUniform1f
 
 class Shader:
     def __init__(self, vertexPath=None, fragmentPath=None):
@@ -8,6 +11,8 @@ class Shader:
             self.id = source.createProgram()
 
             # To do: Check if compilation and linking were successful
+    def __del__(self):
+        glDeleteProgram(id)
 
     def setUniform1f(self, name, value):
         location = glGetUniformLocation(self.id, name)
@@ -60,7 +65,7 @@ class ShaderSource:
         glAttachShader(program, fragmentShader)
         glLinkProgram(program)
 
-        self.status[GL_LINK_STATUS] = glGetProgramiv(shaderProgram, GL_LINK_STATUS)
+        self.status[GL_LINK_STATUS] = glGetProgramiv(program, GL_LINK_STATUS)
         self.infoLog[GL_LINK_STATUS] = glGetProgramInfoLog(program)
 
         glDeleteShader(vertexShader)
