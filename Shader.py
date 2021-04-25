@@ -1,28 +1,47 @@
 from OpenGL.GL import GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_COMPILE_STATUS, GL_LINK_STATUS, \
     glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glGetShaderInfoLog, \
     glCreateProgram, glAttachShader, glLinkProgram, glGetProgramiv, glGetProgramInfoLog, \
-    glDeleteShader, glDeleteProgram, glGetUniformLocation, glUniform1f
+    glDeleteShader, glDeleteProgram, glGetUniformLocation, glUseProgram, glUniform1f
+
+# Shader     
+    # • init
+    # • del
+    # • setUniform1f, setUniform2f, setUniform3f, setUniform4f
 
 class Shader:
-    def __init__(self, vertexPath=None, fragmentPath=None):
 
+    def __init__(self, vertexPath=None, fragmentPath=None):
+        
         if vertexPath and fragmentPath:
             source = ShaderSource(vertexPath, fragmentPath)
             self.id = source.createProgram()
 
-            # To do: Check if compilation and linking were successful
+            print(f"vertex status: {source.status[GL_VERTEX_SHADER]}")
+            print(f"fragment status: {source.status[GL_FRAGMENT_SHADER]}")
+            print(f"link status: {source.status[GL_LINK_STATUS]}")
+
     def __del__(self):
+
         glDeleteProgram(id)
 
+    def use(self):
+
+        glUseProgram(self.id)
+
     def setUniform1f(self, name, value):
+        
         location = glGetUniformLocation(self.id, name)
         glUniform1f(location, value)
 
-# Auxiliary classes below
+
+# ShaderSource      
+    # • init    
+    # • createShader
+    # • createProgram
 
 class ShaderSource:
-    def __init__(self, vertexPath, fragmentPath):
 
+    def __init__(self, vertexPath, fragmentPath):
         vertexFile = open(vertexPath)
         fragmentFile = open(fragmentPath)
 
@@ -57,6 +76,7 @@ class ShaderSource:
         return shader
 
     def createProgram(self):
+
         vertexShader = self.createShader(self.vertexSource, GL_VERTEX_SHADER)
         fragmentShader = self.createShader(self.fragmentSource, GL_FRAGMENT_SHADER)
 

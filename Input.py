@@ -1,5 +1,15 @@
 import json
-import glfw
+
+# Input
+    # • init
+    # • onMouseButtonEvent
+    # • onMouseMoveEvent
+    # • onKeyboardEvent
+    # • add
+    # • bind
+    # • unbind
+    # • remove
+
 
 class Input:
 
@@ -31,20 +41,40 @@ class Input:
     @staticmethod
     def onKeyboardEvent(key, scancode, action, mods):
 
-        name = f"{Input.actions[action]}{Input.names[str(key)]}"
+        signature = str(key)
+        name = f"{Input.actions[action]}{Input.names[signature]}"
 
         if hasattr(Input.currentContext, name):
+
             function = getattr(Input.currentContext, name)
             function(mods)
+
         else:
+
             print("not found")         
 
     @staticmethod
     def add(context):
+
         Input.contexts[context.name] = context
 
     @staticmethod
-    def use(name):
+    def bind(name):
+
         Input.currentContext = Input.contexts[name]
 
-print(glfw.RELEASE)
+    @staticmethod
+    def unbind():
+
+        Input.currentContext = None
+
+    @staticmethod
+    def remove(context):
+
+        name = context.name
+
+        if Input.currentContext.name == name: Input.unbind()
+        
+        Input.contexts[name] = None
+
+    

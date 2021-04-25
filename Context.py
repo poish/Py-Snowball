@@ -1,15 +1,29 @@
 from Input import Input
 
+# Context
+    # • init
+    # • use     activates a context with a given name, if no name is specified, the context instance itself is activated
+
 class Context:
-    def __init__(self, name):
+    def __init__(self, name, active):
+
         self.name = name
         Input.add(self)
 
+        if active: self.use()
+
+    def __del__(self):
+
+        Input.remove(self)
+
+    def setup(self, target):
+        
+        self.target = target
+
     def use(self, name=None):
-        if name == None:
-            Input.use(self.name)
-        else:
-            Input.use(name)
+
+        Input.bind(name) if name else Input.bind(self.name)
+            
 
 # Functions implementing key actions should contain:
 # 1. an action:
