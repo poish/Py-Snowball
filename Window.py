@@ -17,6 +17,7 @@ class Window:
 
     def initializeInput(self):
         Input.init()
+        
         glfw.set_key_callback(self.window, self.onKeyboardEvent)
 
     def onKeyboardEvent(self, window, key, scancode, action, mods):

@@ -40,10 +40,11 @@ class Input:
 
     @staticmethod
     def onKeyboardEvent(key, scancode, action, mods):
-
+        # key = 65 -> "A"
         signature = str(key)
         name = f"{Input.actions[action]}{Input.names[signature]}"
 
+        # name == "pressKeyA"
         if hasattr(Input.currentContext, name):
 
             function = getattr(Input.currentContext, name)

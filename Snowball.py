@@ -1,19 +1,20 @@
 from Window import Window
 
 class Snowball:
+
     def __init__(self):
         self.active = True
         
     def setup(self):
         pass
 
-    def loop(self):
+    def loop(self, dt):
         pass
 
     def finish(self):
         pass
 
-    def run(self):
+    def __call__(self):
         window = Window(640,480,"Untitled")
         
         self.setup()
@@ -21,7 +22,7 @@ class Snowball:
         while not window.shouldClose():
 
             if self.active:
-                self.loop()
+                self.loop(0)
 
             window.finalizeLoop()
 
