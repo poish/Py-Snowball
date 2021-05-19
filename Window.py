@@ -1,9 +1,14 @@
 import glfw
 from Input import Input
 
+from OpenGL.GL import glViewport
+
 class Window:
     def __init__(self, width, height, caption):
         
+        self.width = width
+        self.height = height
+
         # Initialize the library
         glfw.init()
 
@@ -12,13 +17,25 @@ class Window:
         if not self.window:
             glfw.terminate()
 
+        self.configureCallbacks()
         self.initializeInput()
+
         glfw.make_context_current(self.window)
+
+    def configureCallbacks(self):
+
+        glfw.set_key_callback(self.window, self.onKeyboardEvent)
+        glfw.set_framebuffer_size_callback(self.window, self.onWindowResize)
 
     def initializeInput(self):
         Input.init()
         
-        glfw.set_key_callback(self.window, self.onKeyboardEvent)
+    # Window related callbacks
+
+    def onWindowResize(self, window, width, height):
+        glViewport(0,0, width, height)
+
+    # Input related callbacks
 
     def onKeyboardEvent(self, window, key, scancode, action, mods):
         Input.onKeyboardEvent(key, scancode, action, mods)

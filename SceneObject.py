@@ -12,13 +12,8 @@ class Buffer:
         glDeleteBuffers(self.id)
     
     def __call__(self):
+        
         return self.id
-
-    def load(self, data):
-        self.data = data
-
-    def get(self):
-        return self.data
 
     def count(self):
 
@@ -41,10 +36,10 @@ class OpenGLObject:
 
         glBindVertexArray(self.vao)
 
-        glBindBuffer(GL_ARRAY_BUFFER, self.vbo.id)
+        glBindBuffer(GL_ARRAY_BUFFER, self.vbo())
         glBufferData(GL_ARRAY_BUFFER, self.vbo.size(), np.array(self.vbo.data, dtype="float32"), GL_STATIC_DRAW)
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo.id)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo())
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.ebo.size(), np.array(self.ebo.data, dtype="uint32"), GL_STATIC_DRAW)
 
         glVertexAttribPointer(0, 3, GL_FLOAT, False, 3 * 4, None)

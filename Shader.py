@@ -62,7 +62,6 @@ class ShaderSource:
             GL_LINK_STATUS: None
         }
 
-
     def createShader(self, source, shaderType):
 
         shader = glCreateShader(shaderType)
@@ -92,6 +91,3 @@ class ShaderSource:
         glDeleteShader(fragmentShader)
 
         return program
-        
-
-
