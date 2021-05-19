@@ -1,5 +1,7 @@
 from OpenGL.GL import *
 import numpy as np
+import ctypes
+
 class Buffer:
     
     def __init__(self):
@@ -9,10 +11,10 @@ class Buffer:
 
     def __del__(self):
 
-        glDeleteBuffers(self.id)
+        glDeleteBuffers(1, self.id)
     
     def __call__(self):
-        
+
         return self.id
 
     def count(self):
@@ -22,7 +24,6 @@ class Buffer:
     def size(self):
 
         return 4 * len(self.data)
-
 
 class OpenGLObject:
 

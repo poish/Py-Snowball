@@ -31,11 +31,11 @@ class Input:
         Input.names = data["names"]
 
     @staticmethod
-    def onMouseButtonEvent(self):
+    def onMouseButtonEvent(button, action, mods):
         pass
 
     @staticmethod
-    def onMouseMoveEvent(self):
+    def onMouseMoveEvent(self, x, y):
         pass
 
     @staticmethod

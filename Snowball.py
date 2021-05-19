@@ -15,6 +15,7 @@ class Snowball:
         pass
 
     def __call__(self):
+        
         window = Window(640,480,"Untitled")
         
         self.setup()

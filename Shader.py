@@ -21,8 +21,8 @@ class Shader:
             print(f"link status: {source.status[GL_LINK_STATUS]}")
 
     def __del__(self):
-
-        glDeleteProgram(id)
+        pass
+        #glDeleteProgram(id)
 
     def use(self):
 
